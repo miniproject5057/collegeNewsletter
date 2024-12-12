@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Newsletter</title>
+    <style>
+        /* CSS STARTS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("C:\Users\sanas\Desktop\miniproject\homepage background image.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            height: 254px;
+            background-image: url("C:/Sanjana/Mini/fin/bldeacet-engineering-vijayapura-logo.jpg");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        #login {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        #login button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #4f79b1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #login button:hover {
+            background: #3a6583;
+        }
+
+        main {
+            flex-grow: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 300px;
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+        }
+
+        #search-bar {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        #search {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .category {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 220px;
+        }
+
+        .category img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .category img:hover {
+            transform: scale(1.1);
+        }
+
+        .category button {
+            background-color: #4f79b1;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .category button:hover {
+            background-color: #3a6583;
+        }
+
+        /* Modal Styling */
+        #login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 101;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            margin: 10% auto;
+            width: 50%;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .modal-content .close {
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .modal-content button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #4f79b1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 200px;
+        }
+
+        .modal-content button:hover {
+            background: #3a6583;
+        }
+
+        #admin-options {
+            display: none;
+            margin-top: 20px;
+        }
+
+        /* User Login Form */
+        #user-form {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #user-form input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #user-form button {
+            background-color: #4f79b1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #user-form button:hover {
+            background-color: #3a6583;
+        }
+        /* CSS ENDS */
+    </style>
+    <script>
+        function showLoginOptions() {
+            document.getElementById('login-modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('login-modal').style.display = 'none';
+            document.getElementById('admin-options').style.display = 'none';
+            document.getElementById('user-form').style.display = 'none';
+        }
+
+        function loginAs(role) {
+            if (role === 'admin') {
+                document.getElementById('admin-options').style.display = 'block';
+                document.getElementById('user-form').style.display = 'none';
+            } else if (role === 'user') {
+                document.getElementById('user-form').style.display = 'block';
+                document.getElementById('admin-options').style.display = 'none';
+            }
+        }
+
+        function adminLogin(username, password) {
+            if (username === 'admin1' && password === 'admin@blde') {
+                window.location.href = "admin-dashboard.html";
+            } else {
+                alert("Invalid Admin Credentials");
+            }
+        }
+
+        function studentStaffLogin(role) {
+            if (role === 'student') {
+                alert("Student Login Successful");
+                window.location.href = "student-dashboard.html";
+            } else if (role === 'staff') {
+                alert("Staff Login Successful");
+                window.location.href = "staff-dashboard.html";
+            } else {
+                alert("Invalid Credentials");
+            }
+        }
+
+        function userLogin() {
+            const email = document.getElementById('user-email').value;
+            const password = document.getElementById('user-password').value;
+
+            if (email === "user@example.com" && password === "user123") {
+                alert("User Login Successful");
+                window.location.href = "user-dashboard.html";
+            } else {
+                alert("Invalid Email or Password");
+            }
+        }
+
+        function searchArticles() {
+            const query = document.getElementById('search').value;
+            alert(Search results for: ${query});
+        }
+
+        function openCategory(category) {
+            window.location.href = ${category}.html;
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div id="login">
+            <button onclick="showLoginOptions()">Login</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="search-bar">
+            <input type="text" placeholder="Search..." id="search">
+            <button onclick="searchArticles()">Search</button>
+        </div>
+        <div id="categories">
+            <div class="category">
+                <img src="C:/Sanjana/Mini/fin/cultural button.jpeg" alt="Cultural" onclick="openCategory('cultural')">
+                <button onclick="openCategory('cultural')">Cultural</button>
+            </div>
+            <div class="category">
+                <img src="C:/Sanjana/Mini/fin/tech button.jpg" alt="Technical" onclick="openCategory('technical')">
+                <button onclick="openCategory('technical')">Technical</button>
+            </div>
+            <div class="category">
+                <img src="C:/Sanjana/Mini/fin/achievments button.jpeg" alt="Achievements" onclick="openCategory('achievements')">
+                <button onclick="openCategory('achievements')">Achievements</button>
+            </div>
+            <div class="category">
+                <img src="C:/Sanjana/Mini/fin/other button.jpeg" alt="Other" onclick="openCategory('other')">
+                <button onclick="openCategory('other')">Other</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="login-modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <button onclick="loginAs('admin')">Login as Admin</button>
+            <button onclick="loginAs('user')">Login as User</button>
+
+            <div id="admin-options">
+                <button onclick="adminLogin('admin1', 'admin@blde')">Login as Admin</button>
+                <button onclick="studentStaffLogin('student')">Login as Student</button>
+                <button onclick="studentStaffLogin('staff')">Login as Staff</button>
+            </div>
+
+            <div id="user-form">
+                <input type="email" id="user-email" placeholder="Enter Email" required><br>
+                <input type="password" id="user-password" placeholder="Enter Password" required><br>
+                <button onclick="userLogin()">Login</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
