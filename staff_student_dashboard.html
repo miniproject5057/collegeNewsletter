@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f4ed;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4f79b1;
+        }
+
+        .form-container {
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 60%;
+        }
+
+        input, select, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 80%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4f79b1;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3a6583;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload File</h1>
+    <div class="form-container">
+        <form id="uploadForm">
+            <input type="text" id="username" placeholder="Enter your name" required>
+            <select id="category" required>
+                <option value="" disabled selected>Select Category</option>
+                <option value="achievements">Achievements</option>
+                <option value="cultural">Cultural</option>
+                <option value="technical">Technical</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="file" id="fileUpload" accept=".html,.pdf" required>
+            <button type="button" onclick="submitFile()">Upload</button>
+        </form>
+    </div>
+
+    <script>
+        function submitFile() {
+            const username = document.getElementById('username').value;
+            const category = document.getElementById('category').value;
+            const file = document.getElementById('fileUpload').files[0];
+
+            if (!file) {
+                alert("Please upload a file.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('username', username);
+            formData.append('category', category);
+            formData.append('file', file);
+
+            fetch('/upload', { // Replace with your backend API route
+                method: 'POST',
+                body: formData
+            }).then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("File uploaded successfully! Awaiting admin approval.");
+                    window.location.href = "home.html"; // Redirect to home page
+                } else {
+                    alert("Failed to upload file. Please try again.");
+                }
+            }).catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

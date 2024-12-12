@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milestones</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f4ed;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid #ce7457;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ce7457;
+        }
+
+        .milestone {
+            margin: 10px 0;
+        }
+
+        .milestone h2 {
+            cursor: pointer;
+            background-color: #ce7457;
+            color: #ffffff;
+            padding: 10px;
+            margin: 0;
+            border-radius: 5px;
+        }
+
+        .milestone-content {
+            display: none;
+            padding: 10px;
+            background-color: #f9f8f6;
+            border-left: 3px solid #ce7457;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+
+        .milestone-content p, .milestone-content ul {
+            margin: 5px 0;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        .milestone-content ul li strong {
+            color: #ce7457;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Milestones</h1>
+
+        <!-- Add all milestones -->
+        <div class="milestone">
+            <h2>2022 - 2023</h2>
+            <div class="milestone-content">
+                <p>Four UG programs, namely Civil, Mechanical, Electrical and Electronics, and Computer Science & Engineering got NBA accreditation status for three years from NBA, New Delhi.</p>
+            </div>
+        </div>
+
+        <div class="milestone">
+            <h2>2021 - 2022</h2>
+            <div class="milestone-content">
+                <ul>
+                    <li><strong>Times Engineering Survey:</strong> All India Rank 45</li>
+                    <li><strong>ATAL Ranking:</strong> Promising</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="milestone">
+            <h2>2020 - 2021</h2>
+            <div class="milestone-content">
+                <ul>
+                    <li><strong>KSCST:</strong> Best Performing College of the Year</li>
+                    <li><strong>IIC Certification:</strong> 3.5 ratings</li>
+                    <li><strong>MoUs:</strong> Lublin University (Poland), Factory Mind (Norway), Karnataka Science and Technology Academy (KSTA), MONOCEPT, AEROWIRE, HCL</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="milestone">
+            <h2>2018 - 2019</h2>
+            <div class="milestone-content">
+                <p><strong>B+ Grade NAAC Accreditation</strong></p>
+            </div>
+        </div>
+
+        <div class="milestone">
+            <h2>2017 - 2018</h2>
+            <div class="milestone-content">
+                <ul>
+                    <li>Received provisional accreditation status for three years from NBA, New Delhi, for four UG programs: Civil, Mechanical, Electrical and Electronics, and Computer Science & Engineering.</li>
+                    <li>BLEACET was awarded "Excellent Contribution in Education" during II National Education Summit and Awards 2016 by VTU, NSIC, and AICTE.</li>
+                    <li>Successfully organized the State Level 39th Series KSCST Student Project.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="milestone">
+            <h2>2015 - 2016</h2>
+            <div class="milestone-content">
+                <ul>
+                    <li>Five UG programs received provisional accreditation status for two years from NBA, New Delhi.</li>
+                    <li>The period of accreditation was extended by one more year, up to June 2018.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="milestone">
+            <h2>2013 - 2014</h2>
+            <div class="milestone-content">
+                <ul>
+                    <li>Intake for Computer Science and Electronics Communication Engineering increased by 30 (from 90 to 120).</li>
+                    <li>Started M.Tech. in Microelectronics, Control Systems, and Digital Communication.</li>
+                    <li>Obtained ISO 9001:2008 Certification from United Registrar of Systems.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="milestone">
+            <h2>1982 - 1983</h2>
+            <div class="milestone-content">
+                <p>The institute started operations with three basic branches: Civil, Mechanical, and Electrical & Electronics Engineering. Engineering branches began with an intake of 40 students each at the Bangaramma Sajjan Campus.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // JavaScript for collapsible sections
+        document.querySelectorAll('.milestone h2').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
+</body>
+</html>

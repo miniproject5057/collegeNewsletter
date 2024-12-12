@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f4ed;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4f79b1;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #ce7457;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .actions button {
+            padding: 10px 16px;
+            background-color: #4f79b1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .actions button:hover {
+            background-color: #3a6583;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #4f79b1;
+            color: white;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            table, th, td {
+                font-size: 14px;
+            }
+
+            .actions button {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Category</th>
+                    <th>File Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="requestsTable">
+                <!-- Dynamically filled via JavaScript -->
+            </tbody>
+        </table>
+    </main>
+    <footer>
+        <p>Admin Dashboard © 2024</p>
+    </footer>
+
+    <script>
+        // Fetch pending requests
+        function fetchRequests() {
+            fetch('/getRequests') // Replace with your backend API route
+                .then(response => response.json())
+                .then(data => {
+                    const table = document.getElementById('requestsTable');
+                    table.innerHTML = '';
+
+                    data.requests.forEach(request => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${request.username}</td>
+                            <td>${request.category}</td>
+                            <td>${request.fileName}</td>
+                            <td class="actions">
+                                <button onclick="approveRequest('${request.id}')">Approve</button>
+                                <button onclick="rejectRequest('${request.id}')">Reject</button>
+                            </td>
+                        `;
+                        table.appendChild(row);
+                    });
+                });
+        }
+
+        // Approve request
+        function approveRequest(requestId) {
+            fetch(`/approveRequest/${requestId}`, { method: 'POST' }) // Replace with your backend API route
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Request approved.");
+                        fetchRequests();
+                    } else {
+                        alert("Failed to approve request.");
+                    }
+                });
+        }
+
+        // Reject request
+        function rejectRequest(requestId) {
+            fetch(`/rejectRequest/${requestId}`, { method: 'POST' }) // Replace with your backend API route
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Request rejected.");
+                        fetchRequests();
+                    } else {
+                        alert("Failed to reject request.");
+                    }
+                });
+        }
+
+        // Load requests on page load
+        fetchRequests();
+    </script>
+</body>
+</html>
